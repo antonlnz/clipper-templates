@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · YouTube",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes y momentos\n\n## Ideas relacionadas\n\n{% set vid = url|replace:\"/^.*[?&]v=([A-Za-z0-9_-]+).*$/\":\"$1\" %}{% set desc = \"\" %}{% set ldvid = schema:@VideoObject:embedUrl %}{% if ldvid contains vid %}{% set desc = schema:@VideoObject:description %}{% endif %}{% if not desc %}{% set yt = selector:script|join:\"ANDELFIN\"|split:\"ytInitialPlayerResponse = [{]\"|slice:1,2|first|split:\"ANDELFIN\"|first|split:\"videoDetails.:[{]\"|slice:1,2|first %}{% set ytvid = yt|split:\"shortDescription\"|first %}{% if ytvid contains vid %}{% set desc = yt|split:\"shortDescription.:.\"|slice:1,2|first|split:\".,.[A-Za-z]+.:\"|first|replace:\"/.u0026/g\":\"&\"|replace:\"/.u003c/g\":\"<\"|replace:\"/.u003e/g\":\">\"|replace:\"/.u0027/g\":\"'\"|replace:\"/.u003d/g\":\"=\"|unescape %}{% endif %}{% endif %}{% if not desc %}{% set desc = content|split:\"\\n## Transcript\\n\"|first|replace:\"/^!..[(][^)]*[)]/\":\"\"|trim %}{% endif %}{% if desc %}> [!quote] Descripción de YouTube\n{% for line in desc|trim|replace:\"/^([0-9]+):([0-9][0-9]):([0-9][0-9]) /gm\":\"[$1:$2:$3](YTLINK$1h$2m$3s) \"|replace:\"/^([0-9]+):([0-9][0-9]) /gm\":\"[$1:$2](YTLINK$1m$2s) \"|split:\"\\n\" %}{% if line contains \"YTLINK\" %}> {{line|split:\"YTLINK\"|first}}https://www.youtube.com/watch?v={{vid}}&t={{line|split:\"YTLINK\"|last}}{% else %}> {{line}}{% endif %}{% endfor %}\n{% endif %}\n{% if transcript %}\n\n> [!note]- Transcripción\n{% for line in transcript|replace:\"/[*][*]([0-9]+):([0-9][0-9]):([0-9][0-9])[*][*]/g\":\"[$1:$2:$3](YTLINK$1h$2m$3s)\"|replace:\"/[*][*]([0-9]+):([0-9][0-9])[*][*]/g\":\"[$1:$2](YTLINK$1m$2s)\"|split:\"\\n\" %}{% if line contains \"YTLINK\" %}> {{line|split:\"YTLINK\"|first}}https://www.youtube.com/watch?v={{vid}}&t={{line|split:\"YTLINK\"|last}}{% else %}> {{line}}{% endif %}{% endfor %}\n{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Vídeos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{image}}",
+      "type": "text"
+    },
+    {
+      "name": "transcript_status",
+      "value": "pendiente de verificar",
+      "type": "text"
+    },
+    {
+      "name": "transcript_language",
+      "value": "{% set plang = selector:ytd-transcript-footer-renderer #label-text|first|trim %}{% if plang %}{{plang|replace:\"/^Español.*$/\":\"es\"|replace:\"/^Spanish.*$/\":\"es\"|replace:\"/^Inglés.*$/\":\"en\"|replace:\"/^English.*$/\":\"en\"|replace:\"/^Francés.*$/\":\"fr\"|replace:\"/^French.*$/\":\"fr\"|replace:\"/^Alemán.*$/\":\"de\"|replace:\"/^German.*$/\":\"de\"|replace:\"/^Italiano.*$/\":\"it\"|replace:\"/^Italian.*$/\":\"it\"|replace:\"/^Portugués.*$/\":\"pt\"|replace:\"/^Portuguese.*$/\":\"pt\"|replace:\"/^Catalán.*$/\":\"ca\"|replace:\"/^Catalan.*$/\":\"ca\"|replace:\"/^Gallego.*$/\":\"gl\"|replace:\"/^Galician.*$/\":\"gl\"}}{% else %}{{language}}{% endif %}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://www.youtube.com/watch",
+    "https://m.youtube.com/watch"
+  ],
+  "noteNameFormat": "{{title}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

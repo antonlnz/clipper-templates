@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Sci-Hub",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Apuntes\n\n## Paper\n\n**{{selector:title|first|replace:\"/^[^|]*[|] ([^]*) [|] 10[.][^|]*$/\":\"$1\"|trim}}**\n\n> [!quote] Referencia\n> {{selector:#citation|first|replace:\"/[ \n]+/g\":\" \"|trim}}\n\n- **DOI:** [https://doi.org/{{url|replace:\"/^https?:[/][/][^/]+[/](10[.][^?#]+).*$/\":\"$1\"|decode_uri}}](https://doi.org/{{url|replace:\"/^https?:[/][/][^/]+[/](10[.][^?#]+).*$/\":\"$1\"|decode_uri}})\n- **PDF:** {{selector:embed#pdf?src|first}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Papers]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:#citation|first|replace:\"/^([^(]*?)[ ]*[(][0-9]{4}[)][^]*$/\":\"$1\"|replace:\"/[.]+$/\":\".\"|replace:\"/([^,&|]+), ([A-Z][^,&|]*?[.])(?=,|$| &)/g\":\"$2 $1\"|replace:\"/,? & /g\":\", \"|trim}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:title|first|replace:\"/^[^|]*[|] ([^]*) [|] 10[.][^|]*$/\":\"$1\"|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "doi",
+      "value": "{{url|replace:\"/^https?:[/][/][^/]+[/](10[.][^?#]+).*$/\":\"$1\"|decode_uri}}",
+      "type": "text"
+    },
+    {
+      "name": "year",
+      "value": "{{selector:#citation|first|replace:\"/^[^(]*[(]([0-9]{4})[)][^]*$/\":\"$1\"}}",
+      "type": "number"
+    },
+    {
+      "name": "reference",
+      "value": "{{selector:#citation|first|replace:\"/[ \n]+/g\":\" \"|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "pdf_url",
+      "value": "{{selector:embed#pdf?src|first}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "Sci-Hub",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/[^\\/]*sci-hub[^\\/]*\\/10\\./"
+  ],
+  "noteNameFormat": "{{selector:title|first|replace:\"/^[^|]*[|] ([^]*) [|] 10[.][^|]*$/\":\"$1\"|trim|safe_name}} ({{selector:#citation|first|replace:\"/^[^(]*[(]([0-9]{4})[)][^]*$/\":\"$1\"}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

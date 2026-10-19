@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Wikipedia",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Artículo\n\n{{selectorHtml:#mw-content-text .mw-parser-output|first|remove_html:(\".mw-editsection,.navbox,.reference,.reflist,.mw-references-wrap,.metadata,.noprint\")|markdown}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "Wikipedia",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{% set wt = schema:@Article:name %}{% if not wt %}{% set wt = title|replace:\"/ [-–—] Wiki[a-z]+[^]*$/\":\"\" %}{% endif %}{{wt}}",
+      "type": "text"
+    },
+    {
+      "name": "language",
+      "value": "{{url|replace:\"/^https:[/][/]([a-z-]+)[.].*$/\":\"$1\"}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "Wikipedia",
+      "type": "text"
+    },
+    {
+      "name": "updated",
+      "value": "{{schema:@Article:dateModified|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/[a-z-]+\\.(m\\.)?wikipedia\\.org\\/wiki\\//"
+  ],
+  "noteNameFormat": "{% set wt = schema:@Article:name %}{% if not wt %}{% set wt = title|replace:\"/ [-–—] Wiki[a-z]+[^]*$/\":\"\" %}{% endif %}{{wt|safe_name}} (Wikipedia)",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · ServerPartDeals",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Notas\n\n## Producto\n\n![]({{schema:@Product:image|first}})\n\n- **Precio al guardar:** {{schema:@Product:offers.price ?? schema:@Product:offers[0].price}} {{schema:@Product:offers.priceCurrency ?? schema:@Product:offers[0].priceCurrency}}\n{% set brand = schema:@Product:brand.name %}{% if brand %}- **Marca:** {{brand}}\n{% endif %}- **SKU:** {{schema:@Product:sku}}\n\n> [!info]- Especificaciones y garantía\n{{schema:@Product:description|replace:\"/[ ]*\n[ \n]*/g\":\"\\n\"|trim|blockquote}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Productos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{schema:@Product:brand.name}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{schema:@Product:name}}",
+      "type": "text"
+    },
+    {
+      "name": "store",
+      "value": "ServerPartDeals",
+      "type": "text"
+    },
+    {
+      "name": "price",
+      "value": "{{schema:@Product:offers.price ?? schema:@Product:offers[0].price}}",
+      "type": "number"
+    },
+    {
+      "name": "currency",
+      "value": "{{schema:@Product:offers.priceCurrency ?? schema:@Product:offers[0].priceCurrency}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{schema:@Product:image|first}}",
+      "type": "text"
+    },
+    {
+      "name": "sku",
+      "value": "{{schema:@Product:sku}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://serverpartdeals.com/products/"
+  ],
+  "noteNameFormat": "{{schema:@Product:name|safe_name}} (ServerPartDeals)",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

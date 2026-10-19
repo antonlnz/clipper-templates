@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Perfil o cuenta",
+  "behavior": "create",
+  "noteContentFormat": "## Quién es\n\n## Por qué me interesa\n\n## Información capturada\n\n{{content}}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Cuentas]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    }
+  ],
+  "triggers": [],
+  "noteNameFormat": "{{title}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

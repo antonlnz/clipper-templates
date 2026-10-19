@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Anna's Archive",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Apuntes\n\n## Ficha\n\n**{{title|replace:\"/ ?[-–] Anna.s Archive$/\":\"\"|trim}}**\n\n- **Autor:** {{selector:main a:has(span[class*=\"user-edit\"])|first|trim|replace:\"/^([^,;]+), ([^,;]+)$/\":\"$2 $1\"}}\n- **Edición:** {{selector:main a:has(span[class*=\"company\"])|first|trim}}\n- **Archivo:** {{selector:main div.text-sm.mt-4|first|replace:\"/ · 🚀[^]*$/\":\"\"|replace:\"/ · [^A-Za-z0-9]*/g\":\" · \"|trim}}\n{% set isbn = selector:body|first|replace:\"/^(?:[^]*?(97[89][0-9]{10}))?[^]*$/\":\"$1\" %}{% if isbn %}- **ISBN:** {{isbn}}\n{% endif %}- **MD5:** {{url|replace:\"/^.*[/]md5[/]([0-9a-f]+).*$/\":\"$1\"}}\n\n{% set desc = selectorHtml:.js-md5-top-box-description|first|markdown|trim %}{% if desc %}> [!info]- Descripción y metadatos\n{{desc|blockquote}}\n{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Libros]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:main a:has(span[class*=\"user-edit\"])|first|trim|replace:\"/^([^,;]+), ([^,;]+)$/\":\"$2 $1\"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{title|replace:\"/ ?[-–] Anna.s Archive$/\":\"\"|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "edition",
+      "value": "{{selector:main a:has(span[class*=\"company\"])|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "file_info",
+      "value": "{{selector:main div.text-sm.mt-4|first|replace:\"/ · 🚀[^]*$/\":\"\"|replace:\"/ · [^A-Za-z0-9]*/g\":\" · \"|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "isbn",
+      "value": "{{selector:body|first|replace:\"/^(?:[^]*?(97[89][0-9]{10}))?[^]*$/\":\"$1\"}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "Anna's Archive",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?annas-archive\\.[a-z]+\\/md5\\//"
+  ],
+  "noteNameFormat": "{{title|replace:\"/ ?[-–] Anna.s Archive$/\":\"\"|trim|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

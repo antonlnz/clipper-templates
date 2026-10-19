@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Reddit",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Publicación\n\n> Publicado en **{{selector:shreddit-post?subreddit-prefixed-name}}** por *{{selector:shreddit-post?author}}* el {{selector:shreddit-post?created-timestamp|date:\"YYYY-MM-DD HH:mm\"}}\n\n### {{selector:shreddit-post?post-title|trim}}\n\n{{content|split:\"\\n## Comments\\n\"|first|replace:\"/\\n+---[ \n]*$/\":\"\"|trim}}\n{% if content contains \"\\n## Comments\\n\" %}\n\n> [!quote]- Comentarios ({{selector:shreddit-comment-tree?totalcomments}})\n{{content|split:\"\\n## Comments\\n\"|last|trim|replace:\"/ · [^ ]*[0-9]+ points$/gm\":\"\"|blockquote}}\n{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:shreddit-post?post-title|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "subreddit",
+      "value": "{{selector:shreddit-post?subreddit-prefixed-name}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://www.reddit.com"
+  ],
+  "noteNameFormat": "Publicación de {{selector:shreddit-post?author}} en Reddit - {{selector:shreddit-post?post-title|trim|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

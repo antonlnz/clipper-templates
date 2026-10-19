@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · IMDb",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué la guardé\n\n## Apuntes\n\n## Ficha\n\n![Póster]({{schema:image}})\n\n- **Título original:** {{schema:name}}\n- **Año:** {{schema:datePublished|date:\"YYYY\"}}\n- **Dirección:** {{schema:director[*].name|join:\", \" ?? schema:creator[*].name|join:\", \"}}\n- **Reparto:** {{schema:actor[*].name|join:\", \"}}\n- **Género:** {{schema:genre|join:\", \"}}\n{% set dur = schema:duration|replace:\"/^PT(?:([0-9]+)H)?(?:([0-9]+)M)?$/\":\"$1 h $2 min\"|replace:\"/^ h /\":\"\"|replace:\"/ h  min$/\":\" h\" %}{% if dur %}- **Duración:** {{dur}}\n{% endif %}\n> [!quote] Sinopsis\n> {{schema:description}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "{% if meta:property:og:type contains \"tv\" %}[[Categorías/Series]]{% else %}[[Categorías/Películas]]{% endif %}",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{schema:director[*].name|join:\", \" ?? schema:creator[*].name|join:\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{schema:alternateName ?? schema:name}}",
+      "type": "text"
+    },
+    {
+      "name": "original_title",
+      "value": "{{schema:name}}",
+      "type": "text"
+    },
+    {
+      "name": "year",
+      "value": "{{schema:datePublished|date:\"YYYY\"}}",
+      "type": "number"
+    },
+    {
+      "name": "genres",
+      "value": "{{schema:genre|join:\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "site",
+      "value": "IMDb",
+      "type": "text"
+    },
+    {
+      "name": "imdb_rating",
+      "value": "{{schema:aggregateRating.ratingValue}}",
+      "type": "number"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{schema:image}}",
+      "type": "text"
+    },
+    {
+      "name": "score",
+      "value": "",
+      "type": "number"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.|m\\.)?imdb\\.com\\/([a-z]{2}\\/)?title\\/tt[0-9]+\\/?(\\?.*)?$/"
+  ],
+  "noteNameFormat": "{{schema:alternateName|safe_name ?? schema:name|safe_name}} ({{schema:datePublished|date:\"YYYY\"}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

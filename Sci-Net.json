@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Sci-Net",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Apuntes\n\n## Paper\n\n**{{selector:.article .title|first|trim}}**\n\n{% set au = selector:.article .authors|first|trim %}{% if au %}{{au}}\n\n{% endif %}- **Revista:** {{selector:.article .journal|first|trim}} ({{selector:.article .year|first|trim}})\n- **DOI:** [https://doi.org/{{selector:.article .doi a|first|trim}}](https://doi.org/{{selector:.article .doi a|first|trim}})\n- **PDF:** {% set pdf = selector:.pdf iframe?src|first %}{% if pdf contains \"://\" %}{{pdf}}{% else %}https://{{url|split:\"/\"|slice:2,3}}{{pdf}}{% endif %}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Papers]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:.article .authors|first|trim}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:.article .title|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "doi",
+      "value": "{{selector:.article .doi a|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "year",
+      "value": "{{selector:.article .year|first|trim}}",
+      "type": "number"
+    },
+    {
+      "name": "journal",
+      "value": "{{selector:.article .journal|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "pdf_url",
+      "value": "{% set pdf = selector:.pdf iframe?src|first %}{% if pdf contains \"://\" %}{{pdf}}{% else %}https://{{url|split:\"/\"|slice:2,3}}{{pdf}}{% endif %}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "Sci-Net",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?sci-net\\.[a-z]+\\/10\\./"
+  ],
+  "noteNameFormat": "{{selector:.article .title|first|trim|safe_name}} ({{selector:.article .year|first|trim}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · GitHub · Issue o PR",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Contenido\n\n{{content}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{title|replace:\"/ · (Issue|Pull Request|Discussion) #[0-9]+ · [^]*$/\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "repository",
+      "value": "{{url|split:\"/\"|slice:3,4}}/{{url|split:\"/\"|slice:4,5}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "GitHub",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/github\\.com\\/[^\\/]+\\/[^\\/]+\\/(issues|pull|discussions)\\/[0-9]+/"
+  ],
+  "noteNameFormat": "{{url|split:\"/\"|slice:3,4}}-{{url|split:\"/\"|slice:4,5}} #{{url|split:\"/\"|slice:6,7}} - {{title|replace:\"/ · (Issue|Pull Request|Discussion) #[0-9]+ · [^]*$/\":\"\"|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

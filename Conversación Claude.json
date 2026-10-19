@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Conversación Claude",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Conversación\n\n{{content}}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "Claude",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "value": "{{description}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://claude.ai/chat/",
+    "https://claude.ai/share/"
+  ],
+  "noteNameFormat": "Conversación con Claude - {{title|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

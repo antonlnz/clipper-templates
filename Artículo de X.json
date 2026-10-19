@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Artículo de X",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Artículo\n\n# {{title}}\n\n{{content}}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{title}}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{selector:time?datetime|first|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "profile",
+      "value": "https://x.com/{{author|replace:\"/^.*[(]@([A-Za-z0-9_]+)[)]$/\":\"$1\"|replace:\"/^@/\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "X",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{selector:[data-testid=\"twitterArticleReadView\"] img?src|first}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?(x|twitter)\\.com\\/([A-Za-z0-9_]+|i)\\/article\\/[0-9]+/"
+  ],
+  "noteNameFormat": "Artículo de @{{author|replace:\"/^.*[(]@([A-Za-z0-9_]+)[)]$/\":\"$1\"|replace:\"/^@/\":\"\"}} en X - {{title|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

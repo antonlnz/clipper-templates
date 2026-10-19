@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · PcComponentes",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Notas\n\n## Producto\n\n![]({{schema:@product:image|first}})\n\n- **Precio al guardar:** {{schema:@product:offers.offers.price ?? schema:@product:offers.lowPrice}} {{schema:@product:offers.priceCurrency}}\n{% set brand = schema:@product:brand.name %}{% if brand %}- **Marca:** {{brand}}\n{% endif %}- **Modelo:** {{schema:@product:model}}\n- **EAN:** {{schema:@product:gtin13}}\n- **Categoría:** {{schema:@product:category}}\n\n> [!quote] Descripción\n> {{schema:@product:description}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Productos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{schema:@product:brand.name}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{schema:@product:name}}",
+      "type": "text"
+    },
+    {
+      "name": "store",
+      "value": "PcComponentes",
+      "type": "text"
+    },
+    {
+      "name": "price",
+      "value": "{{schema:@product:offers.offers.price ?? schema:@product:offers.lowPrice}}",
+      "type": "number"
+    },
+    {
+      "name": "currency",
+      "value": "{{schema:@product:offers.priceCurrency}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{schema:@product:image|first}}",
+      "type": "text"
+    },
+    {
+      "name": "model",
+      "value": "{{schema:@product:model}}",
+      "type": "text"
+    },
+    {
+      "name": "ean",
+      "value": "{{schema:@product:gtin13}}",
+      "type": "text"
+    },
+    {
+      "name": "product_category",
+      "value": "{{schema:@product:category}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?pccomponentes\\.(com|pt|fr|it)\\/[a-z0-9-]+\\/?$/"
+  ],
+  "noteNameFormat": "{{schema:@product:name|safe_name}} (PcComponentes)",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

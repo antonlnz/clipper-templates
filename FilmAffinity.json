@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · FilmAffinity",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué la guardé\n\n## Apuntes\n\n## Ficha\n\n![Póster]({{selector:#movie-main-image-container img?src|first ?? meta:property:og:image}})\n\n- **Título original:** {{selector:dl.movie-info > dd|first|trim|replace:\"/ [(]TV (Series|Miniseries|Mini-Series)[)]$/\":\"\"}}\n- **Año:** {{selector:[itemprop=\"datePublished\"]|first|trim}}\n- **Dirección:** {{selector:[itemprop=\"director\"] [itemprop=\"name\"]|join:\", \"}}\n- **Reparto:** {{selector:[itemprop=\"actor\"] [itemprop=\"name\"]|slice:0,8|join:\", \"}}\n- **Género:** {{selector:[itemprop=\"genre\"]|join:\", \"}}\n- **Duración:** {{selector:[itemprop=\"duration\"]|first|trim}}\n\n> [!quote] Sinopsis\n> {{selector:[itemprop=\"description\"]|first|trim}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "{% set info = selector:dl.movie-info|first %}{% if info contains \"Serie de TV\" %}[[Categorías/Series]]{% else %}[[Categorías/Películas]]{% endif %}",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:[itemprop=\"director\"] [itemprop=\"name\"]|join:\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:h1 [itemprop=\"name\"]|first|trim ?? selector:h1|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "original_title",
+      "value": "{{selector:dl.movie-info > dd|first|trim|replace:\"/ [(]TV (Series|Miniseries|Mini-Series)[)]$/\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "year",
+      "value": "{{selector:[itemprop=\"datePublished\"]|first|trim}}",
+      "type": "number"
+    },
+    {
+      "name": "genres",
+      "value": "{{selector:[itemprop=\"genre\"]|join:\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "site",
+      "value": "FilmAffinity",
+      "type": "text"
+    },
+    {
+      "name": "filmaffinity_rating",
+      "value": "{{selector:#movie-rat-avg|first|trim|replace:\",\":\".\"}}",
+      "type": "number"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{selector:#movie-main-image-container img?src|first ?? meta:property:og:image}}",
+      "type": "text"
+    },
+    {
+      "name": "score",
+      "value": "",
+      "type": "number"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?filmaffinity\\.com\\/[a-z]{2}\\/film[0-9]+\\.html/"
+  ],
+  "noteNameFormat": "{{selector:h1 [itemprop=\"name\"]|first|trim ?? selector:h1|first|trim|safe_name}} ({{selector:[itemprop=\"datePublished\"]|first|trim}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

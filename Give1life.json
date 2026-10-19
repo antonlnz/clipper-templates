@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Give1life",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Notas\n\n## Producto\n\n![]({{schema:@Product:image|first}})\n\n- **Precio al guardar:** {{schema:@Product:offers[0].price ?? schema:@Product:offers.price}} {{schema:@Product:offers[0].priceCurrency ?? schema:@Product:offers.priceCurrency}}\n{% set brand = schema:@Product:brand.name %}{% if brand %}- **Marca:** {{brand}}\n{% endif %}- **SKU:** {{schema:@Product:sku}}\n- **EAN:** {{schema:@Product:gtin}}\n\n> [!quote] Descripción\n{{schema:@Product:description|trim|blockquote}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Productos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{schema:@Product:brand.name}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{schema:@Product:name}}",
+      "type": "text"
+    },
+    {
+      "name": "store",
+      "value": "Give1life",
+      "type": "text"
+    },
+    {
+      "name": "price",
+      "value": "{{schema:@Product:offers[0].price ?? schema:@Product:offers.price}}",
+      "type": "number"
+    },
+    {
+      "name": "currency",
+      "value": "{{schema:@Product:offers[0].priceCurrency ?? schema:@Product:offers.priceCurrency}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{schema:@Product:image|first}}",
+      "type": "text"
+    },
+    {
+      "name": "sku",
+      "value": "{{schema:@Product:sku}}",
+      "type": "text"
+    },
+    {
+      "name": "ean",
+      "value": "{{schema:@Product:gtin}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?give1life\\.com\\/producto\\//"
+  ],
+  "noteNameFormat": "{{schema:@Product:name|safe_name}} (Give1life)",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

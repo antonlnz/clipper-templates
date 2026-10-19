@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Libro de Goodreads",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Apuntes de lectura\n\n### Capítulo 1\n\n> «Copia aquí la frase que subrayaste.»\n\nExplica con tus palabras qué significa y por qué te importa. Añade la página solo si lees en papel.\n\n### Capítulo 2\n\n### Capítulo 3\n\n### Capítulo 4\n\n### Capítulo 5\n\n## Citas y páginas\n\n## Descripción de la editorial\n\n{{selectorHtml:[data-testid=\"description\"] .Formatted|first|markdown|trim}}",
+  "properties": [
+    {
+      "name": "title",
+      "value": "{% set tt = schema:@Book:name %}{% if not tt %}{% set tt = selector:h1[data-testid=\"bookTitle\"]|first %}{% endif %}{{tt|replace:\"/ [[].*$/\":\"\"|replace:\"/&amp;/g\":\"&\"|replace:\"/&#x27;/g\":\"'\"|replace:\"/&#39;/g\":\"'\"|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "categories",
+      "value": "[[Categorías/Libros]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{% set au = schema:@Book:author[*].name|join:\", \" %}{% if not au %}{% set au = selector:.ContributorLink__name|unique|join:\", \" %}{% endif %}{{au}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "genres",
+      "value": "{{selector:#__NEXT_DATA__|split:\"bookGenres\"|slice:1,2|first|split:\"]\"|first|split:\"[{,].name.:.\"|slice:1|join:\"|\"|replace:\"/.,.webUrl[^|]*/g\":\"\"|replace:\"/[|]/g\":\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{schema:@Book:image ?? image}}",
+      "type": "text"
+    },
+    {
+      "name": "original_title",
+      "value": "{{selector:#__NEXT_DATA__|replace:\"/^(?:[^]*?originalTitle.:(.[^]*?),.[A-Za-z_])?[^]*$/\":\"$1\"|replace:\"/^null$/\":\"\"|replace:\"/^.|.$/g\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "isbn",
+      "value": "{{schema:@Book:isbn}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://www.goodreads.com/book/show/"
+  ],
+  "noteNameFormat": "{% set tt = schema:@Book:name %}{% if not tt %}{% set tt = selector:h1[data-testid=\"bookTitle\"]|first %}{% endif %}{{tt|replace:\"/ [[].*$/\":\"\"|replace:\"/&amp;/g\":\"&\"|replace:\"/&#x27;/g\":\"'\"|replace:\"/&#39;/g\":\"'\"|trim|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

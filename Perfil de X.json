@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Perfil de X",
+  "behavior": "create",
+  "noteContentFormat": "## Quién es\n\n## Por qué me interesa\n\n## Perfil\n\n{% set banner = selector:a[href$=\"/header_photo\"] img?src|first %}{% if banner %}![Portada]({{banner}})\n\n{% endif %}**{{selector:title|first|replace:\"/^[(][0-9]+[)] /\":\"\"|replace:\"/ [(]@.*$/\":\"\"}}** · [@{{url|replace:\"/[?#].*$/\":\"\"|split:\"/\"|slice:3,4}}](https://x.com/{{url|replace:\"/[?#].*$/\":\"\"|split:\"/\"|slice:3,4}})\n\n> {{selector:[data-testid=\"UserDescription\"]|first ?? meta:name:description}}\n\n{% set loc = selector:[data-testid=\"UserLocation\"]|first %}{% set web = selector:[data-testid=\"UserUrl\"]|first %}{% set joined = selector:[data-testid=\"UserJoinDate\"]|first %}{% if loc %}- Ubicación: {{loc}}\n{% endif %}{% if web %}- Web: {{web}}\n{% endif %}{% if joined %}- {{joined}}\n{% endif %}- {{selector:a[href$=\"/following\"]|first|replace:\"/([0-9])(Siguiendo|Following)/\":\"$1 $2\"|replace:\"/ +/g\":\" \"}} · {{selector:a[href$=\"/verified_followers\"]|first|replace:\"/([0-9])(Seguidores|Followers)/\":\"$1 $2\"|replace:\"/ +/g\":\" \"}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Cuentas]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:title|first|replace:\"/^[(][0-9]+[)] /\":\"\"|replace:\"/ [(]@.*$/\":\"\"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url|replace:\"/[?#].*$/\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "site",
+      "value": "X",
+      "type": "text"
+    },
+    {
+      "name": "handle",
+      "value": "@{{url|replace:\"/[?#].*$/\":\"\"|split:\"/\"|slice:3,4}}",
+      "type": "text"
+    },
+    {
+      "name": "bio",
+      "value": "{{selector:[data-testid=\"UserDescription\"]|first ?? meta:name:description}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{selector:a[href$=\"/photo\"] img?src|first ?? meta:property:og:image}}",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "Perfil de {{selector:title|first|replace:\"/^[(][0-9]+[)] /\":\"\"|replace:\"/ [(]@.*$/\":\"\"}} (@{{url|replace:\"/[?#].*$/\":\"\"|split:\"/\"|slice:3,4}}) en X",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?(x|twitter)\\.com\\/(?!(home|explore|notifications|messages|search|settings|compose|i)(\\/|$))[A-Za-z0-9_]{1,15}\\/?(\\?.*)?$/"
+  ],
+  "noteNameFormat": "Perfil de {{selector:title|first|replace:\"/^[(][0-9]+[)] /\":\"\"|replace:\"/ [(]@.*$/\":\"\"|safe_name}} (@{{url|replace:\"/[?#].*$/\":\"\"|split:\"/\"|slice:3,4}}) en X",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

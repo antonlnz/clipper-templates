@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Episodio de Spotify",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Episodio\n\n![]({{selector:main img?src|first}})\n\n**{{selector:main [data-testid=\"episodeTitle\"]|first|trim}}** · {{selector:[data-testid=\"showTitle\"]|first|trim}}\n\n> [!quote] Descripción\n{{selectorHtml:main h2 + div|first|markdown|trim|blockquote}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Podcasts]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:[data-testid=\"showTitle\"]|first|trim}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "show",
+      "value": "[[{{selector:[data-testid=\"showTitle\"]|first|trim|safe_name}}]]",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:main [data-testid=\"episodeTitle\"]|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "url_spotify",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "thumbnail",
+      "value": "{{selector:main img?src|first}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://open.spotify.com/episode/"
+  ],
+  "noteNameFormat": "Episodio de {{selector:[data-testid=\"showTitle\"]|first|trim|safe_name}} - {{selector:main [data-testid=\"episodeTitle\"]|first|trim|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

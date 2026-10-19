@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Publicación de X",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n{% set art = selector:[data-testid=\"twitter-article-title\"]|first %}{% if art %}## Artículo\n\n# {{art}}\n\n{{content}}{% else %}## Publicación\n\n{{content|split:\"\\n## Comments\\n\"|first|replace:\"/\\n+---[ \n]*$/\":\"\"|trim}}\n{% if content contains \"\\n## Comments\\n\" %}\n\n> [!quote]- Respuestas\n{{content|split:\"\\n## Comments\\n\"|last|trim|blockquote}}\n{% endif %}{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{% set art = selector:[data-testid=\"twitter-article-title\"]|first %}{% if art %}{{art}}{% else %}Publicación de @{{url|split:\"/\"|slice:3,4}} en X{% endif %}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{selector:article[data-testid=\"tweet\"] time?datetime|first|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "profile",
+      "value": "https://x.com/{{url|split:\"/\"|slice:3,4}}",
+      "type": "text"
+    },
+    {
+      "name": "userID",
+      "value": "{{url|split:\"/\"|slice:3,4}}",
+      "type": "text"
+    },
+    {
+      "name": "image",
+      "value": "{{selector:article[data-testid=\"tweet\"] [data-testid=\"tweetPhoto\"] img?src|first}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?(twitter\\.com|x\\.com)\\/[^/]+\\/status\\//"
+  ],
+  "noteNameFormat": "{% set art = selector:[data-testid=\"twitter-article-title\"]|first %}{% if art %}Artículo de @{{url|split:\"/\"|slice:3,4}} en X - {{art|safe_name}}{% else %}Publicación de @{{url|split:\"/\"|slice:3,4}} en X ({{selector:article[data-testid=\"tweet\"] time?datetime|first|date:\"YYYY-MM-DD HH[h]mm\"}}){% endif %}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · GitHub",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Contenido capturado\n\n## README\n\n{{selectorHtml:article|markdown}}\n\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{author}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:#repo-title-component a}}",
+      "type": "text"
+    },
+    {
+      "name": "owner",
+      "value": "{{meta:name:octolytics-dimension-user_login}}",
+      "type": "text"
+    },
+    {
+      "name": "website",
+      "value": "{{selector:.Layout-sidebar a?href|first}}",
+      "type": "text"
+    },
+    {
+      "name": "description",
+      "value": "{{selector:.Layout-sidebar p|first}}",
+      "type": "text"
+    },
+    {
+      "name": "stars",
+      "value": "{{selector:#repo-stars-counter-star?title}}",
+      "type": "number"
+    }
+  ],
+  "triggers": [
+    "https://github.com/"
+  ],
+  "noteNameFormat": "Repositorio {{meta:name:octolytics-dimension-user_login}} · {{selector:#repo-title-component a|first|trim}} - {{selector:.Layout-sidebar p|first|trim|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Hacker News",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Publicación\n\n**[{{selector:.titleline > a|first}}]({{selector:.titleline > a?href|first}})**\n\n{{content|split:\"\\n## Comments\\n\"|first|replace:\"/\\n+---[ \n]*$/\":\"\"|trim}}\n{% if content contains \"\\n## Comments\\n\" %}\n\n> [!quote]- Comentarios\n{{content|split:\"\\n## Comments\\n\"|last|trim|replace:\"/ · [^ ]*[0-9]+ points$/gm\":\"\"|blockquote}}\n{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Artículos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:.hnuser|first}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:.titleline > a|first}}",
+      "type": "text"
+    },
+    {
+      "name": "source_url",
+      "value": "{{selector:.titleline > a?href|first}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "Hacker News",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "https://news.ycombinator.com/item"
+  ],
+  "noteNameFormat": "Hacker News - {{title|replace:\"/ [|] Hacker News$/\":\"\"|safe_name}}",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

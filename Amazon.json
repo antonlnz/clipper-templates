@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Amazon",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Notas\n\n## Producto\n\n![]({{selector:#landingImage?data-old-hires|first ?? selector:#landingImage?src|first}})\n\n- **Precio al guardar:** {{selector:#corePrice_feature_div .a-offscreen|first|replace:\"/[^0-9,.]/g\":\"\"|replace:\"/[.]/g\":\"\"|replace:\",\":\".\" ?? selector:.a-price .a-offscreen|first|replace:\"/[^0-9,.]/g\":\"\"|replace:\"/[.]/g\":\"\"|replace:\",\":\".\"}} {{selector:#corePrice_feature_div .a-offscreen|first|replace:\"/[0-9,.  ]/g\":\"\" ?? selector:.a-price .a-offscreen|first|replace:\"/[0-9,.  ]/g\":\"\"}}\n{% set brand = selector:#bylineInfo|first|replace:\"/^(Visita la tienda de |Visita la Store de |Visit the |Marca: |Brand: )/\":\"\"|replace:\"/ Store$/\":\"\"|trim %}{% if brand %}- **Marca:** {{brand}}\n{% endif %}- **ASIN:** {{selector:input#ASIN?value|first}}\n\n> [!info] Características\n{{selector:#feature-bullets li span.a-list-item|list|blockquote}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Productos]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:#bylineInfo|first|replace:\"/^(Visita la tienda de |Visita la Store de |Visit the |Marca: |Brand: )/\":\"\"|replace:\"/ Store$/\":\"\"|trim}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{selector:#productTitle|first|trim}}",
+      "type": "text"
+    },
+    {
+      "name": "store",
+      "value": "Amazon",
+      "type": "text"
+    },
+    {
+      "name": "price",
+      "value": "{{selector:#corePrice_feature_div .a-offscreen|first|replace:\"/[^0-9,.]/g\":\"\"|replace:\"/[.]/g\":\"\"|replace:\",\":\".\" ?? selector:.a-price .a-offscreen|first|replace:\"/[^0-9,.]/g\":\"\"|replace:\"/[.]/g\":\"\"|replace:\",\":\".\"}}",
+      "type": "number"
+    },
+    {
+      "name": "currency",
+      "value": "{{selector:#corePrice_feature_div .a-offscreen|first|replace:\"/[0-9,.  ]/g\":\"\" ?? selector:.a-price .a-offscreen|first|replace:\"/[0-9,.  ]/g\":\"\"}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{{selector:#landingImage?data-old-hires|first ?? selector:#landingImage?src|first}}",
+      "type": "text"
+    },
+    {
+      "name": "asin",
+      "value": "{{selector:input#ASIN?value|first}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?amazon\\.[a-z.]+\\/(.*\\/)?(dp|gp\\/product)\\/[A-Z0-9]{10}/"
+  ],
+  "noteNameFormat": "{{selector:#productTitle|first|trim|safe_name}} (Amazon)",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

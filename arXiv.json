@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · arXiv",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué me interesa\n\n## Apuntes\n\n## Paper\n\n**{{meta:name:citation_title}}**\n\n{{selector:meta[name=\"citation_author\"]?content|join:\"|\"|replace:\"/([^|,]+), ([^|]+)/g\":\"$2 $1\"|replace:\"/[|]/g\":\", \"}}\n\n- **arXiv:** [{{meta:name:citation_arxiv_id}}]({{url}}) · [PDF]({{meta:name:citation_pdf_url}})\n- **Fecha:** {{meta:name:citation_date|date:\"YYYY-MM-DD\"}}\n\n> [!quote] Resumen\n> {{meta:name:citation_abstract ?? selector:blockquote.abstract|first|replace:\"/^Abstract:/\":\"\"|trim}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Papers]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{{selector:meta[name=\"citation_author\"]?content|join:\"|\"|replace:\"/([^|,]+), ([^|]+)/g\":\"$2 $1\"|replace:\"/[|]/g\":\", \"}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{{meta:name:citation_title}}",
+      "type": "text"
+    },
+    {
+      "name": "published",
+      "value": "{{meta:name:citation_date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "arxiv_id",
+      "value": "{{meta:name:citation_arxiv_id}}",
+      "type": "text"
+    },
+    {
+      "name": "doi",
+      "value": "{{meta:name:citation_doi}}",
+      "type": "text"
+    },
+    {
+      "name": "pdf_url",
+      "value": "{{meta:name:citation_pdf_url}}",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "arXiv",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?arxiv\\.org\\/abs\\//"
+  ],
+  "noteNameFormat": "{{meta:name:citation_title|safe_name}} (arXiv {{meta:name:citation_arxiv_id}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

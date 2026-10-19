@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Instagram",
+  "behavior": "create",
+  "noteContentFormat": "## Por qué lo guardé\n\n## Mis apuntes\n\n## Publicación\n\n{% set img = meta:property:og:image %}{% if not img %}{% set img = selector:div._aagv img?src|first %}{% endif %}![]({{img}})\n{% set n = selector:div._acnb|length %}{% if n > 1 %}\n*Carrusel de {{n}} imágenes: aquí solo se guarda la primera. [Ver todas en Instagram]({{url}}).*\n{% endif %}\n> [!quote] Texto de la publicación\n{% set cap = meta:property:og:title|replace:\"/^[^\\\"]*\\\"/\":\"\"|replace:\"/\\\"$/\":\"\"|trim %}{% if not cap %}{% set cap = selectorHtml:div:has(> span > time) + span|first|markdown|trim %}{% endif %}{{cap|blockquote}}\n\n{% set h = meta:name:description|replace:\"/^[^]*? - ([A-Za-z0-9_.]+) (el|on|am|le|il) [^]*$/\":\"$1\" %}{% if not h %}{% set h = selector:span._ap3a._aaco._aacw|first|trim %}{% endif %}[@{{h}}](https://www.instagram.com/{{h}}/) · {{selector:time?datetime|first|date:\"YYYY-MM-DD\"}}\n",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "{% if url contains \"/reel\" %}[[Categorías/Vídeos]]{% else %}[[Categorías/Artículos]]{% endif %}",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{% set h = meta:name:description|replace:\"/^[^]*? - ([A-Za-z0-9_.]+) (el|on|am|le|il) [^]*$/\":\"$1\" %}{% if not h %}{% set h = selector:span._ap3a._aaco._aacw|first|trim %}{% endif %}@{{h}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "published",
+      "value": "{{selector:time?datetime|first|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "site",
+      "value": "Instagram",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{% set img = meta:property:og:image %}{% if not img %}{% set img = selector:div._aagv img?src|first %}{% endif %}{{img}}",
+      "type": "text"
+    },
+    {
+      "name": "title",
+      "value": "{% set h = meta:name:description|replace:\"/^[^]*? - ([A-Za-z0-9_.]+) (el|on|am|le|il) [^]*$/\":\"$1\" %}{% if not h %}{% set h = selector:span._ap3a._aaco._aacw|first|trim %}{% endif %}Publicación de @{{h}} en Instagram",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.)?instagram\\.com\\/([A-Za-z0-9_.]+\\/)?(p|reel|reels|tv)\\/[A-Za-z0-9_-]+/"
+  ],
+  "noteNameFormat": "{% set h = meta:name:description|replace:\"/^[^]*? - ([A-Za-z0-9_.]+) (el|on|am|le|il) [^]*$/\":\"$1\" %}{% if not h %}{% set h = selector:span._ap3a._aaco._aacw|first|trim %}{% endif %}Publicación de @{{h}} en Instagram ({{selector:time?datetime|first|date:\"YYYY-MM-DD HH[h]mm\"}})",
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}

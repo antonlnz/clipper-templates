@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "0.1.0",
+  "name": "Andel · Canal de YouTube",
+  "behavior": "create",
+  "noteNameFormat": "{% set nm = selector:yt-page-header-renderer h1|first|replace:\"/[  ]+/g\":\" \"|trim %}{% if not nm %}{% set nm = schema:@ProfilePage:mainEntity.name %}{% endif %}Canal de {{nm|safe_name}} en YouTube",
+  "noteContentFormat": "## Quién es\n\n## Por qué me interesa\n\n## Canal\n\n{% set im = selector:yt-page-header-renderer yt-avatar-shape img?src|first|replace:\"/=s[0-9]+-/\":\"=s900-\" %}{% if not im %}{% set im = selector:yt-page-header-renderer img?src|first %}{% endif %}{% if im %}![]({{im}})\n\n{% endif %}{% set nm = selector:yt-page-header-renderer h1|first|replace:\"/[  ]+/g\":\" \"|trim %}{% if not nm %}{% set nm = schema:@ProfilePage:mainEntity.name %}{% endif %}{% set hd = selector:yt-page-header-renderer yt-content-metadata-view-model|first|replace:\"/^[^@]*(@[^•  ]+)[^]*$/\":\"$1\"|trim %}{% if not hd contains \"@\" %}{% set hd = url|replace:\"/^.*youtube[.]com[/](@[^/?#]+).*$/\":\"$1\"|decode_uri %}{% endif %}**{{nm}}** · [{{hd}}](https://www.youtube.com/{{hd}})\n\n{% set sh = schema:@ProfilePage:mainEntity.alternateName %}{% if sh == hd %}{% set ds = schema:@ProfilePage:mainEntity.description %}{% else %}{% set ds = selector:yt-page-header-renderer yt-description-preview-view-model truncated-text-content|last|replace:\"/[.][.][.] ?más$/\":\"\"|replace:\"/[.][.][.] ?more$/\":\"\"|trim %}{% endif %}{% if ds %}> [!quote] Descripción del canal\n{{ds|trim|blockquote}}\n\n{% endif %}{% if sh == hd %}{% set links = schema:@ProfilePage:mainEntity.sameAs %}{% if links %}**Enlaces**\n\n{{links|list}}\n{% endif %}{% endif %}",
+  "properties": [
+    {
+      "name": "categories",
+      "value": "[[Categorías/Cuentas]]",
+      "type": "multitext"
+    },
+    {
+      "name": "authors",
+      "value": "{% set nm = selector:yt-page-header-renderer h1|first|replace:\"/[  ]+/g\":\" \"|trim %}{% if not nm %}{% set nm = schema:@ProfilePage:mainEntity.name %}{% endif %}{% set hd = selector:yt-page-header-renderer yt-content-metadata-view-model|first|replace:\"/^[^@]*(@[^•  ]+)[^]*$/\":\"$1\"|trim %}{% if not hd contains \"@\" %}{% set hd = url|replace:\"/^.*youtube[.]com[/](@[^/?#]+).*$/\":\"$1\"|decode_uri %}{% endif %}{{hd}}",
+      "type": "multitext"
+    },
+    {
+      "name": "topics",
+      "value": "",
+      "type": "multitext"
+    },
+    {
+      "name": "url",
+      "value": "{{url}}",
+      "type": "text"
+    },
+    {
+      "name": "status",
+      "value": "guardado",
+      "type": "text"
+    },
+    {
+      "name": "captured",
+      "value": "{{date|date:\"YYYY-MM-DD\"}}",
+      "type": "date"
+    },
+    {
+      "name": "capture_method",
+      "value": "web-clipper",
+      "type": "text"
+    },
+    {
+      "name": "has_notes",
+      "value": "false",
+      "type": "checkbox"
+    },
+    {
+      "name": "title",
+      "value": "{% set nm = selector:yt-page-header-renderer h1|first|replace:\"/[  ]+/g\":\" \"|trim %}{% if not nm %}{% set nm = schema:@ProfilePage:mainEntity.name %}{% endif %}Canal de {{nm}} en YouTube",
+      "type": "text"
+    },
+    {
+      "name": "site",
+      "value": "YouTube",
+      "type": "text"
+    },
+    {
+      "name": "handle",
+      "value": "{% set hd = selector:yt-page-header-renderer yt-content-metadata-view-model|first|replace:\"/^[^@]*(@[^•  ]+)[^]*$/\":\"$1\"|trim %}{% if not hd contains \"@\" %}{% set hd = url|replace:\"/^.*youtube[.]com[/](@[^/?#]+).*$/\":\"$1\"|decode_uri %}{% endif %}{{hd}}",
+      "type": "text"
+    },
+    {
+      "name": "cover_url",
+      "value": "{% set im = selector:yt-page-header-renderer yt-avatar-shape img?src|first|replace:\"/=s[0-9]+-/\":\"=s900-\" %}{% if not im %}{% set im = selector:yt-page-header-renderer img?src|first %}{% endif %}{{im}}",
+      "type": "text"
+    }
+  ],
+  "triggers": [
+    "/^https:\\/\\/(www\\.|m\\.)?youtube\\.com\\/(@[^\\/?#]+|channel\\/[^\\/?#]+|c\\/[^\\/?#]+|user\\/[^\\/?#]+)(\\/(featured|videos|shorts|streams|playlists|about|community))?\\/?(\\?.*)?$/"
+  ],
+  "path": "03_Fuentes",
+  "vault": "Andel"
+}
